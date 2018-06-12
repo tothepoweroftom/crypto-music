@@ -6,18 +6,10 @@
     <b-row>
       <b-col>
         <b-row>
-          <b-col>
-            <instrument-strip></instrument-strip>
+          <b-col v-for="(instrument, index) in instruments" :key="index">
+            <instrument-strip :id="index"></instrument-strip>
           </b-col>
-          <b-col>
-            <instrument-strip></instrument-strip>
-          </b-col> 
-          <b-col>
-            <instrument-strip></instrument-strip>
-          </b-col>
-          <b-col>
-            <instrument-strip></instrument-strip>
-          </b-col> 
+
         </b-row>
       </b-col>
       <b-col>
@@ -37,7 +29,7 @@
     mapState
   } from 'vuex'
 
-  import Bell from '../ToneInstruments/Bell.js'
+  import Sampler from '../ToneInstruments/Sampler.js'
   import Visualizer from './SubComponents/Visualizer.vue'
   import InstrumentStrip from './SubComponents/InstrumentStrip.vue'
   export default {
@@ -54,6 +46,8 @@
       console.log(this.$socket);
 
     },
+
+
   
     methods: {
       start() {
@@ -82,8 +76,8 @@
         }
       }, 
       generateNote(value) {
-        console.log(Bell.instrument)
-        Bell.instrument.triggerAttackRelease(440, 1.0);
+        console.log(Sampler.instrument)
+        Sampler.instrument.triggerAttackRelease(440, 1.0);
 
       },
     },
@@ -92,6 +86,7 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         websocket: null,
+        instruments: [0,1,2,3],
       }
     }
   }

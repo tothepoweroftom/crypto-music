@@ -36,7 +36,13 @@
             </b-col>
 
         </b-row>
-                <b-row>
+        <b-row>
+            <!-- <div class="envelop" -->
+                <b-col>
+                </b-col>
+         
+        </b-row>
+        <b-row>
             <b-btn size="sm" class="control-btn" :class="{'is-grey': !isMuted, 'is-muted': isMuted }" @click="muteInstrument">M</b-btn>
             <b-btn size="sm" class="control-btn" :class="{'is-grey': !isSoloed, 'is-soloed': isSoloed }"  @click="soloInstrument">S</b-btn>
 
@@ -55,6 +61,8 @@
 <script>
 import RangeSlider from 'vue-range-slider'
 
+import Nexus from 'nexusui'
+
 export default {
     data() {
         return {
@@ -65,9 +73,15 @@ export default {
             parameter4: 30,
             isSoloed: true,
             isMuted: true,
+            envelope: null,
 
 
         }
+    },
+      props: ['id'],
+
+    mounted() {
+        this.initAmplitudeEnvelope();
     },
 
     methods: {
@@ -102,7 +116,7 @@ export default {
     margin: 10px;
 }
 
-.is-muted{
+.is-grey{
   background-color:$color2;
 }
 .is-muted{
@@ -125,7 +139,9 @@ input[type="range"] {
    top: 40%;
    transform: rotate(270deg);
 }
-
+#envelope {
+    // width:50px;
+}
 /* The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
