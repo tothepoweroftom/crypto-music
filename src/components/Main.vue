@@ -30,6 +30,11 @@
   } from 'vuex'
 
   import Sampler from '../ToneInstruments/Sampler.js'
+  import Bell from '../ToneInstruments/Bell.js'
+  import FMSynth from '../ToneInstruments/FMSynth.js'
+  import MonoSynth from '../ToneInstruments/MonoSynth.js'
+
+
   import Visualizer from './SubComponents/Visualizer.vue'
   import InstrumentStrip from './SubComponents/InstrumentStrip.vue'
   export default {
@@ -76,8 +81,10 @@
         }
       }, 
       generateNote(value) {
-        console.log(Sampler.instrument)
         Sampler.instrument.triggerAttackRelease(440, 1.0);
+        Bell.instrument.triggerAttackRelease(55, 1.0);
+        FMSynth.instrument.triggerAttackRelease(220, 1.0);
+        MonoSynth.instrument.triggerAttackRelease(110, 0.5);
 
       },
     },
@@ -86,7 +93,7 @@
       return {
         msg: 'Welcome to Your Vue.js App',
         websocket: null,
-        instruments: [0,1,2,3],
+        instruments: [Sampler,Bell,FMSynth,MonoSynth],
       }
     }
   }

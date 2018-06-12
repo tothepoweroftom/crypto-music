@@ -1,6 +1,6 @@
 import Tone from 'tone'
 
-class Bell {
+class Sampler {
     constructor(){
         this.instrument = new Tone.Sampler({
 			'C3' : 'C3.[mp3|ogg]',
@@ -14,7 +14,7 @@ class Bell {
 
   }
   
-  const instance = new Bell();
+  const instance = new Sampler();
   Object.freeze(instance);
   
   export default instance;

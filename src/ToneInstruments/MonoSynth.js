@@ -2,7 +2,7 @@ import Tone from 'tone'
 
 class MonoSynth {
     constructor(){
-        this.instrument = new new Tone.MonoSynth({
+        this.instrument = new Tone.MonoSynth({
 			"oscillator" : {
 				"type" : "square8"
 			},
@@ -19,14 +19,15 @@ class MonoSynth {
 				"release" : 0.8,
 				"baseFrequency" : 300,
 				"octaves" : 4
-			}
+			},
+			"volume": -15,
 		}).toMaster();
     }
   
 
   }
   
-  const instance = new Bell();
+  const instance = new MonoSynth();
   Object.freeze(instance);
   
   export default instance;

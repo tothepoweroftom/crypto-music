@@ -70,7 +70,6 @@ export default {
             parameter1: 1,
             parameter2: 10,
             parameter3: 70,
-            parameter4: 30,
             isSoloed: true,
             isMuted: true,
             envelope: null,
@@ -81,7 +80,6 @@ export default {
       props: ['id'],
 
     mounted() {
-        this.initAmplitudeEnvelope();
     },
 
     methods: {
