@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
       <h1>Crypto Music</h1>
       <b-btn @click="start">Start</b-btn>
       <b-btn @click="stop">Stop</b-btn>
@@ -8,22 +8,22 @@
         <b-row>
           <b-col>
             <instrument-strip></instrument-strip>
-
           </b-col>
           <b-col>
             <instrument-strip></instrument-strip>
           </b-col> 
-                    <b-col>
+          <b-col>
             <instrument-strip></instrument-strip>
-
           </b-col>
           <b-col>
             <instrument-strip></instrument-strip>
           </b-col> 
         </b-row>
-       
       </b-col>
       <b-col>
+        <visualizer>
+
+        </visualizer>
       </b-col>
     </b-row>
 
@@ -38,13 +38,13 @@
   } from 'vuex'
 
   import Bell from '../ToneInstruments/Bell.js'
-
-
+  import Visualizer from './SubComponents/Visualizer.vue'
   import InstrumentStrip from './SubComponents/InstrumentStrip.vue'
   export default {
     name: 'hello',
     components: {
       InstrumentStrip,
+      Visualizer,
     },
     computed: {
       ...mapState(['bell']),

@@ -12,8 +12,10 @@ export default {
 
 <style lang="scss">
   @import './assets/scss/palette.scss';
+  @import url('https://fonts.googleapis.com/css?family=Raleway|Work+Sans');
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

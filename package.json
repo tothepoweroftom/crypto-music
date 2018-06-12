@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta.2",
@@ -18,6 +20,7 @@
     "vue": "^2.5.2",
     "vue-circle-slider": "^1.0.2",
     "vue-native-websocket": "^2.0.7",
+    "vue-range-slider": "^0.6.0",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^2.1.1-b",
     "vue-websocket": "^0.2.2",
@@ -61,7 +64,12 @@
     "webpack-bundle-analyzer": "^2.2.1",
     "webpack-dev-middleware": "^1.10.0",
     "webpack-hot-middleware": "^2.18.0",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "@storybook/vue": "^3.4.7",
+    "@storybook/addon-actions": "^3.4.7",
+    "@storybook/addon-links": "^3.4.7",
+    "@storybook/addons": "^3.4.7",
+    "babel-preset-vue": "^2.0.2"
   },
   "engines": {
     "node": ">= 4.0.0",
