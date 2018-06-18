@@ -1,5 +1,8 @@
 <template>
     <div class='visualizer'>
+        <canvas>
+            
+        </canvas>
     </div>
 </template>
 

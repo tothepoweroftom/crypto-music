@@ -3,7 +3,9 @@ import Tone from 'tone'
 class Sampler {
     constructor(){
         this.instrument = new Tone.Sampler({
-			'C3' : 'C3.[mp3|ogg]',
+      'C3' : 'C3.[mp3|ogg]',
+      'C4' : 'cello_C4.[mp3|ogg]',
+
 
 		}, {
 			'release' : 1,
