@@ -8,7 +8,7 @@
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side="50"
+                    side=50
                 ></circle-slider>
             </b-col>
             <b-col>
@@ -17,7 +17,7 @@
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side="50"
+                    side=50
 
 
                 ></circle-slider>
@@ -29,7 +29,7 @@
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side="50"
+                    side=50
 
 
                 ></circle-slider>
@@ -47,12 +47,12 @@
             <b-btn size="sm" class="control-btn" :class="{'is-grey': !isSoloed, 'is-soloed': isSoloed }"  @click="soloInstrument">S</b-btn>
 
         </b-row>
-        <b-row>
+        <!-- <b-row>
             <div class="slider-container">
                 <input class="slider" type="range"/>
             </div>
 
-        </b-row>
+        </b-row> -->
 
         </b-card>
 
@@ -101,10 +101,9 @@ export default {
 
 .strip {
     margin-top:50px;
-    height: 50vh;
     width:100%;
     background:$color2;
-    min-width: 100px;
+    min-width: 80px;
     max-width: 130px;
 }
 
@@ -144,7 +143,7 @@ input[type="range"] {
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
-    // width:12/0%;
+    width:20vh;
     height: 15px; /* Specified height */
     background: #3b3b3b; /* Grey background */
     outline: none; /* Remove outline */

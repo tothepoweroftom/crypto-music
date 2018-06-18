@@ -17,9 +17,5 @@ export default new Router({
         name: 'mixer',
         component: MixerView,
     }
-
-      
-      
-    
   ]
 })

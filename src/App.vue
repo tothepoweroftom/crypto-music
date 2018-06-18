@@ -75,8 +75,9 @@ import {
       }, 
       generateNote(value) {
         Sampler.instrument.triggerAttackRelease(330, 1.0);
-        Bell.instrument.triggerAttackRelease(55, 1.0);
+        Bell.instrument.triggerAttackRelease(440, 1.0);
         FMSynth.instrument.triggerAttackRelease(220, 1.0);
+        MonoSynth.instrument.triggerAttackRelease(110, 0.5);
 
       },
     },
@@ -85,7 +86,6 @@ import {
       return {
         msg: 'Welcome to Your Vue.js App',
         websocket: null,
-        instruments: [Sampler,Bell,FMSynth,MonoSynth],
       }
     }
   }
@@ -126,6 +126,10 @@ body {
   a {
     color: #42b983;
   }
+
+  .card {
+    border-radius:0px;
+}
 
    /* Enter and leave animations can use different */
   

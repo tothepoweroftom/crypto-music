@@ -1,14 +1,21 @@
 <template>
-    <div class='visualizer'>
-        <canvas>
-            
-        </canvas>
+    <div class='visualizer' id="visualizer">
+
     </div>
 </template>
 
 <script>
+import sketch from './p5VisualiserSketch.js'
+import p5 from 'p5'
 export default {
-
+    data() {
+        return {
+            myp5: null,
+        }
+    },
+    mounted() {
+        this.myp5 = new p5(sketch, document.getElementById('visualizer'))
+    }
 }
 </script>
 

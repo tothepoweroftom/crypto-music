@@ -3,9 +3,9 @@ import Tone from 'tone'
 class Bell {
     constructor(){
         this.instrument = new Tone.MetalSynth({
-			"harmonicity" : 3,
+			"harmonicity" : 31,
 			"resonance" : 800,
-			"modulationIndex" : 10,
+			"modulationIndex" : 2,
 			"envelope" : {
 				"decay" : 2.0,
 			},

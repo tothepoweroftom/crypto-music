@@ -17,10 +17,14 @@
 
 <script>
   import Visualizer from '../components/SubComponents/Visualizer.vue'
-
+ 
 export default {
     components: {
       Visualizer,
+    },
+
+    created() {
+
     },
 }
 </script>

@@ -8,8 +8,13 @@
             </router-link>
         </b-row>
         <b-row>
-          <b-col v-for="(instrument, index) in instruments" :key="index">
+          <b-col  v-for="(instrument, index) in instruments" :key="index">
             <instrument-strip :id="index"></instrument-strip>
+          </b-col>
+
+
+          <b-col cols="6">
+            <effect-strip></effect-strip>
           </b-col>
 
         </b-row>
@@ -20,11 +25,26 @@
 
 <script>
   import InstrumentStrip from '../components/SubComponents/InstrumentStrip.vue'
+    import EffectStrip from '../components/SubComponents/EffectStrip.vue'
+
+  import Sampler from '../../src/ToneInstruments/Sampler.js'
+  import Bell from '../../src/ToneInstruments/Bell.js'
+  import FMSynth from '../../src/ToneInstruments/FMSynth.js'
+  import MonoSynth from '../../src/ToneInstruments/MonoSynth.js'
 
 export default {
     components: {
       InstrumentStrip,
+      EffectStrip,
+
     },
+
+    data() {
+      return {
+        instruments: [Sampler,FMSynth,MonoSynth],
+
+      }
+    }
 }
 </script>
 
