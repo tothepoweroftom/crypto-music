@@ -2,22 +2,41 @@ import Tone from 'tone'
 
 class FMSynth {
     constructor(){
-        this.instrument = new Tone.FMSynth({
-			"modulationIndex" : 12.22,
-			"envelope" : {
-				"attack" : 0.01,
-				"decay" : 0.2
+		this.instrument = new Tone.FMSynth({
+
+			"harmonicity": 1.11,
+			"modulationIndex": 5,
+			"detune": 0,
+			"oscillator": {
+				"type": "sine"
 			},
-			"modulation" : {
-				"type" : "square"
+			"modulation": {
+				"type": "sine"
 			},
-			"modulationEnvelope" : {
-				"attack" : 0.2,
-				"decay" : 0.01
-			}, 
-			"volume": -15
-		}).toMaster();
-    }
+			"modulationEnvelope": {
+				"attack": 0.05,
+				"decay": 0,
+				"sustain": 1.0,
+				"release": 0.2,
+			}
+		});
+
+		this.limiter = new Tone.Limiter(-6);
+		this.eq = new Tone.EQ3(-10, -20, -1);
+		this.dist = new Tone.Distortion(0.9);
+		this.vibrato = new Tone.Vibrato(1, 0.1);
+		this.pingPong = new Tone.PingPongDelay("4n", 0.7);
+		this.reverb = new Tone.Freeverb(0.1, 500);
+		this.vol = new Tone.Volume(0).toMaster();
+	}
+	
+	connectComponents() {
+		this.instrument.chain(this.eq, this.vibrato, this.pingPong, this.reverb, this.dist, this.limiter, this.vol)
+	}
+
+	playNote() {
+		this.instrument.triggerAttackRelease("C4", 0.5);
+	}
   
 
   }

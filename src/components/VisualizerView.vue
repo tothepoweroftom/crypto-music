@@ -2,8 +2,8 @@
 <div class="container" style="height:100vh; ">
     <b-col>
         <b-row>
-            <router-link tag="li" to="/mixer">
-                 <a>Mixer</a>
+            <router-link to="/mixer">
+                <i class="fas fa-sliders-h" style="font-size:28px;position:absolute; top:10px; right:30px"></i>
             </router-link>
         </b-row>
         <b-row>

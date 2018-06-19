@@ -3,8 +3,10 @@
 
       <b-col>
         <b-row>
-            <router-link tag="li" to="/">
-                 <a>Visualizer</a>
+            <router-link to="/">
+                 <i class="fas fa-times" style="font-size:22px;"></i>
+
+
             </router-link>
         </b-row>
         <b-row>

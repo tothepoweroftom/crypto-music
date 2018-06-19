@@ -9,7 +9,6 @@ export default function Particle(x, y, level, sketch) {
     this.vel.mult(sketch.map(this.level, 0, 5, 5, 2));
     
     this.move = function(allParticles) {
-        console.log(allParticles)
       this.life++;
       
       // Add friction.

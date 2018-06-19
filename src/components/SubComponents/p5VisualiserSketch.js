@@ -4,26 +4,39 @@ import Delaunay from './Delaunay'
 export default function( sketch ) {
 
     var allParticles = [];
-    var maxLevel = 5;
+    var maxLevel = 8;
     var useFill = false;
     
     var data = [];
+    var width = 0;
+    var height = 0;
+    var counter = 0;
   
     sketch.setup = function() {
-      sketch.createCanvas(200, 200);
+
+      width = document.getElementById('visualizer').clientWidth;
+      height = document.getElementById('visualizer').clientHeight;
+
+      sketch.createCanvas(width, height);
   
-      sketch.colorMode(sketch.HSB, 360);
       
       sketch.textAlign(sketch.CENTER);
       
-      sketch.background(0);
+      // sketch.background(0);
     };
   
     sketch.draw = function() {
        // Create fade effect.
        sketch.noStroke();
-       sketch.fill(0, 30);
-       sketch.rect(0, 0, 200, 200);
+      if(counter <= 500) {
+        sketch.fill(44, 48, 46, 127);
+        counter += 1;
+
+      } else {
+        sketch.fill(44, 48, 46, 255);
+      counter = 0;
+      }
+       sketch.rect(0, 0, width, height);
       
       // Move and spawn particles.
       // Remove any that is below the velocity threshold.
@@ -68,10 +81,10 @@ export default function( sketch ) {
           // Base its hue by the particle's life.
           if (useFill) {
             sketch.noStroke();
-            sketch.fill(165+p1.life*1.5, 360, 360);
+            sketch.fill(155, 225, 157);
           } else {
             sketch.noFill();
-            sketch.stroke(165+p1.life*1.5, 360, 360);
+            sketch.stroke(155, 225, 157);
           }
           
           sketch.triangle(p1.pos.x, p1.pos.y, 
@@ -85,5 +98,13 @@ export default function( sketch ) {
       allParticles.push(new Particle(sketch.mouseX, sketch.mouseY, maxLevel, sketch));
 
     };
+
+    sketch.addParticles = function() {
+
+      let x = sketch.random( 50, width-5);
+      let y = sketch.random(50, height-50);
+      allParticles.push(new Particle(x, y, maxLevel, sketch));
+
+    }
   };
   

@@ -1,11 +1,24 @@
 <template>
   <div id="app">
       <div class="container">
-      <h1>Crypto Music</h1>
-      <b-btn variant="outline-secondary" @click="start"> <i class="fas fa-play"></i></b-btn>
-      <b-btn variant="outline-secondary" @click="stop"><i class="fas fa-stop"></i></b-btn>
+        <div class="web-title">
+                <h4>Crypto Music</h4>
+                  <ul>
+                  <router-link to="/about">
+                    <a>About</a>
+                  </router-link>
+                  <li>
+                        <b-btn class="play-btn" variant="outline-secondary" @click="toggleStart"> {{buttonClass}}</b-btn>
 
-    <b-row>
+                  </li>
+                  </ul>
+
+
+        </div>
+
+
+
+    <b-row style="padding-top:80px;">
         <transition name="slide-fade" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -19,8 +32,11 @@
 
 <script>
 import {
-    mapState
+    mapState, 
+    mapActions,
   } from 'vuex'
+
+
 
   import Sampler from '../src/ToneInstruments/Sampler.js'
   import Bell from '../src/ToneInstruments/Bell.js'
@@ -37,11 +53,15 @@ import {
       Visualizer,
     },
     computed: {
-      ...mapState(['bell']),
+      ...mapState(['bell','p5Object']),
     },
+
+
   
     mounted() {
       console.log(this.$socket);
+      Bell.connectComponents()
+            FMSynth.connectComponents()
 
     },
 
@@ -56,6 +76,22 @@ import {
       stop() {
       this.$socket.send('{"op":"unconfirmed_sub"}')
       delete this.$options.sockets.onmessage
+
+      },
+      toggleStart() {
+
+        if (!this.playing) {
+          this.$socket.send('{"op":"unconfirmed_sub"}')
+          this.$options.sockets.onmessage = (data) => this.processTxData(event)
+          this.buttonClass = 'Stop'
+          this.playing = !this.playing
+        } else if (this.playing) { 
+          this.$socket.send('{"op":"unconfirmed_sub"}')
+          delete this.$options.sockets.onmessage
+          this.buttonClass = 'Start'
+          this.playing = !this.playing
+
+        }
 
       },
       processTxData(event) {
@@ -74,10 +110,9 @@ import {
         }
       }, 
       generateNote(value) {
-        Sampler.instrument.triggerAttackRelease(330, 1.0);
-        Bell.instrument.triggerAttackRelease(440, 1.0);
-        FMSynth.instrument.triggerAttackRelease(220, 1.0);
-        MonoSynth.instrument.triggerAttackRelease(110, 0.5);
+        this.p5Object.addParticles()
+        Bell.playNote();
+        FMSynth.playNote();
 
       },
     },
@@ -86,6 +121,8 @@ import {
       return {
         msg: 'Welcome to Your Vue.js App',
         websocket: null,
+        buttonClass: 'Start',
+        playing: false,
       }
     }
   }
@@ -93,10 +130,10 @@ import {
 
 <style lang="scss">
   @import './assets/scss/palette.scss';
-  @import url('https://fonts.googleapis.com/css?family=Raleway|Work+Sans');
+@import url('https://fonts.googleapis.com/css?family=Space+Mono');
 
 #app {
-font-family: 'Raleway', sans-serif;
+font-family: 'Space Mono', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -145,7 +182,7 @@ body {
   }
   
   .slide-fade-enter {
-    transform: translateX(-100%);
+    transform: translateX(+200%);
 
   }
   .slide-fade-enter-to {
@@ -156,7 +193,22 @@ body {
   /* .slide-fade-leave-active below version 2.1.8 */
   
   {
-        transform: translateX(100%);
+        transform: translateX(-200%);
         opacity: 0;
+  }
+
+  .web-title {
+    position: absolute;
+    top: 20px;
+    left:20px;
+    width:50px;
+  }
+
+  .play-btn {
+    color:$color3;
+    border: 0px;
+    margin-left:-10px;
+    height:20px;
+    padding:0px;
   }
 </style>
