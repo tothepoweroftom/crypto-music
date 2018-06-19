@@ -13,7 +13,7 @@ class Bell {
 		})
 		this.limiter = new Tone.Limiter(-6);
 		this.eq = new Tone.EQ3(-10, -20, -1);
-		this.delay = new Tone.FeedbackDelay("8n", 0.5);
+		this.delay = new Tone.FeedbackDelay("8n", 0.9);
 		this.dist = new Tone.Distortion(0.9);
 		this.vibrato = new Tone.Vibrato(130, 0.1);
 		this.crusher = new Tone.BitCrusher(8);
@@ -25,12 +25,12 @@ class Bell {
 	}
 	
 	connectComponents() {
-		this.instrument.chain(this.eq, this.reverb, this.dist, this.limiter, this.delay, this.vol)
+		this.instrument.chain(this.eq, this.reverb, this.limiter, this.delay, this.vol)
 	}
 
 	playNote() {
 		var note = this.scale[Math.floor(Math.random()*this.scale.length)];
-		this.instrument.triggerAttackRelease(note);
+		this.instrument.triggerAttackRelease(note, 0.1);	
 	}
   
 

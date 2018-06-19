@@ -41,7 +41,7 @@ import {
   import Sampler from '../src/ToneInstruments/Sampler.js'
   import Bell from '../src/ToneInstruments/Bell.js'
   import FMSynth from '../src/ToneInstruments/FMSynth.js'
-  import MonoSynth from '../src/ToneInstruments/MonoSynth.js'
+  import PolySynth from '../src/ToneInstruments/PolySynth.js'
 
 
   import Visualizer from '../src/components/SubComponents/Visualizer.vue'
@@ -60,8 +60,9 @@ import {
   
     mounted() {
       console.log(this.$socket);
-      Bell.connectComponents()
             FMSynth.connectComponents()
+            PolySynth.connectComponents()
+            Sampler.connectComponents()
 
     },
 
@@ -111,8 +112,10 @@ import {
       }, 
       generateNote(value) {
         this.p5Object.addParticles()
-        Bell.playNote();
         FMSynth.playNote();
+                PolySynth.playNote();
+                Sampler.playNote();
+
 
       },
     },

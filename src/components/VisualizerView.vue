@@ -3,7 +3,7 @@
     <b-col>
         <b-row>
             <router-link to="/mixer">
-                <i class="fas fa-sliders-h" style="font-size:28px;position:absolute; top:10px; right:30px"></i>
+                <i class="fas fa-sliders-h" style="font-size:20px;position:absolute; top:10px; right:30px"></i>
             </router-link>
         </b-row>
         <b-row>

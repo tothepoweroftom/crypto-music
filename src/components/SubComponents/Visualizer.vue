@@ -36,7 +36,7 @@ export default {
 .visualizer {
     width:100%;
     height: 90vh;
-        margin-top:50px;
+    margin-top:50px;
     border-radius: 5px;
 }
 

@@ -32,7 +32,7 @@
   import Sampler from '../../src/ToneInstruments/Sampler.js'
   import Bell from '../../src/ToneInstruments/Bell.js'
   import FMSynth from '../../src/ToneInstruments/FMSynth.js'
-  import MonoSynth from '../../src/ToneInstruments/MonoSynth.js'
+  import PolySynth from '../../src/ToneInstruments/PolySynth.js'
 
 export default {
     components: {
@@ -43,7 +43,7 @@ export default {
 
     data() {
       return {
-        instruments: [Sampler,FMSynth,MonoSynth],
+        instruments: [Sampler,FMSynth,PolySynth],
 
       }
     }

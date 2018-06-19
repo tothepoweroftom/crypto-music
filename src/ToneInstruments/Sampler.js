@@ -10,8 +10,26 @@ class Sampler {
 		}, {
 			'release' : 1,
 			'baseUrl' : 'static/audio/drone/'
-		}).toMaster();
+    })
+    
+    this.limiter = new Tone.Limiter(-6);
+		this.eq = new Tone.EQ3(-10, -2, +10);
+		this.dist = new Tone.Distortion(0.9);
+		this.vibrato = new Tone.Vibrato(1, 0.1);
+		this.pingPong = new Tone.PingPongDelay("2n", 0.9);
+		this.reverb = new Tone.Freeverb(0.9, 600);
+		this.vol = new Tone.Volume(0).toMaster();
+		this.scale = ["A4", "C5", "D5", "E5", "G5"];
     }
+
+    connectComponents() {
+      this.instrument.chain(this.eq, this.pingPong, this.reverb,this.limiter, this.vol)
+    }
+  
+    playNote() {
+      var note = this.scale[Math.floor(Math.random()*this.scale.length)];
+      this.instrument.triggerAttackRelease(note, 2.0);
+        }
   
 
   }
