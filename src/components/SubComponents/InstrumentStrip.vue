@@ -1,6 +1,6 @@
 <template>
-        <b-card class="strip" :title="title">
-
+        <b-card class="strip" >
+        <p style="font-size: 10px"> {{instrument.name}}</p>
         <b-row>
             <b-col>
                 <circle-slider
@@ -8,19 +8,27 @@
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side=50
+                    :side="50"
+                     @touchmove="updateParams"
+                    :min="-20"
+                    :max="6"
                 ></circle-slider>
+                <p class="tiny">Vol</p>
             </b-col>
-            <b-col>
+            <!-- <b-col>
                 <circle-slider
                     v-model="parameter2"
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side=50
-
+                    :side="50"
+                     @touchmove="updateParams"
+                    :min="100"
+                    :max="5000"
 
                 ></circle-slider>
+                                <p class="tiny">Filter</p>
+
             </b-col>
 
             <b-col>
@@ -29,12 +37,14 @@
                     progressColor="#9AE19D"
                     knobColor="#9AE19D"
                     circleColor="#537A5A"
-                    side=50
+                    :side="50"
+                     @touchmove="updateParams"
 
 
                 ></circle-slider>
-            </b-col>
+                                                <p class="tiny">Dist</p>
 
+            </b-col> -->
         </b-row>
         <b-row>
             <!-- <div class="envelop" -->
@@ -43,8 +53,8 @@
          
         </b-row>
         <b-row>
-            <b-btn size="sm" class="control-btn" :class="{'is-grey': !isMuted, 'is-muted': isMuted }" @click="muteInstrument">M</b-btn>
-            <b-btn size="sm" class="control-btn" :class="{'is-grey': !isSoloed, 'is-soloed': isSoloed }"  @click="soloInstrument">S</b-btn>
+            <b-btn size="sm" class="control-btn" :class="{'is-grey': !isMuted, 'is-muted': isMuted }" @click="muteInstrument">Mute</b-btn>
+            <!-- <b-btn size="sm" class="control-btn" :class="{'is-grey': !isSoloed, 'is-soloed': isSoloed }"  @click="soloInstrument">S</b-btn> -->
 
         </b-row>
         <!-- <b-row>
@@ -67,29 +77,38 @@ export default {
     data() {
         return {
             title: 'Bell',
-            parameter1: 1,
-            parameter2: 10,
+            parameter1: -12,
+            parameter2: 1000,
             parameter3: 70,
-            isSoloed: true,
-            isMuted: true,
+                        parameter4: 100,
+
+            isSoloed: false,
+            isMuted: false,
             envelope: null,
 
 
         }
     },
-      props: ['id'],
+      props: ['id', 'instrument'],
 
     mounted() {
+        console.log("INSTRUMENT",this.instrument.name)
     },
 
     methods: {
         muteInstrument() {
             this.isMuted = !this.isMuted
+            this.instrument.vol.mute = this.isMuted;
             console.log(this.isMuted);
         },
         soloInstrument() {
             this.isSoloed = !this.isSoloed
             console.log(this.isSoloed)
+
+        },
+
+        updateParams() {
+            this.instrument.vol.volume.value = this.parameter1;
 
         },
     },
@@ -104,13 +123,15 @@ export default {
     width:100%;
     background:$color2;
     min-width: 80px;
-    max-width: 130px;
+    max-width:160px;
 }
 
 .control-btn {
-    height: 30px;
-    width:30px;
+ 
     margin: 10px;
+    border-radius:0px;
+    border: 0.5px solid;
+    font-size:10px;
 }
 
 .is-grey{
@@ -138,6 +159,10 @@ input[type="range"] {
 }
 #envelope {
     // width:50px;
+}
+
+.tiny {
+    font-size:8px;
 }
 /* The slider itself */
 .slider {

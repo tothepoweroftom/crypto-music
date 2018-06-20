@@ -11,6 +11,7 @@ class Bell {
 				"decay"  : 0.1 ,
 				"release"  : 0.01			},
 		})
+		this.name = "Bell"
 		this.limiter = new Tone.Limiter(-6);
 		this.eq = new Tone.EQ3(-10, -20, -1);
 		this.delay = new Tone.FeedbackDelay("8n", 0.9);

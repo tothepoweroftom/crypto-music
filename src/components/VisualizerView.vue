@@ -11,6 +11,7 @@
         </b-row>
 
     </b-col>
+    
 </div>
 
 </template>

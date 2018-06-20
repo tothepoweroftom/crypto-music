@@ -2,35 +2,29 @@
   <div id="app">
       <div class="container">
         <div class="web-title">
-                <h4>Crypto Music</h4>
-                  <ul>
-                  <router-link to="/about">
-                    <a>About</a>
-                  </router-link>
-                  <li>
-                        <b-btn class="play-btn" variant="outline-secondary" @click="toggleStart"> {{buttonClass}}</b-btn>
-
-                  </li>
-                  </ul>
-
-
+          <h1 style="font-size: 3.0vh;">Crypto Music</h1>
+          <h5 style="font-size: 1.5vh; font-weight:100; color: rgba(154, 225, 157, 1); border-bottom:1px solid; display: inline-block; ">Realtime Bitcoin Transactions</h5>
+            <ul>
+              <router-link to="/about">
+                <a>About</a>
+              </router-link>
+              <li>
+                    <b-btn class="play-btn" id="play-btn" variant="outline-secondary" @click="toggleStart"> {{buttonClass}}</b-btn>
+              </li>
+            </ul>
         </div>
-
-
-
-    <b-row style="padding-top:80px;">
-        <transition name="slide-fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
-    </b-row>
-
-
-  
-  </div>
+        <b-row style="padding-top:80px;">
+            <transition name="slide-fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
+        </b-row>
+      </div>    
   </div>
 </template>
 
 <script>
+import Tone from 'tone'
+import StartAudioContext from 'startaudiocontext'
 import {
     mapState, 
     mapActions,
@@ -70,14 +64,16 @@ import {
   
     methods: {
       start() {
-      this.$socket.send('{"op":"unconfirmed_sub"}')
-      this.$options.sockets.onmessage = (data) => this.processTxData(event)
-
+        this.$socket.send('{"op":"unconfirmed_sub"}')
+        this.$options.sockets.onmessage = (data) => this.processTxData(event)
+        StartAudioContext(Tone.context, '#play-btn').then(function(){
+          //started
+          console.log("web audio started");
+        })
       },
       stop() {
-      this.$socket.send('{"op":"unconfirmed_sub"}')
-      delete this.$options.sockets.onmessage
-
+        this.$socket.send('{"op":"unconfirmed_sub"}')
+        delete this.$options.sockets.onmessage
       },
       toggleStart() {
 
@@ -106,15 +102,15 @@ import {
             var output = outputs[j];
             totalTxValue += output.value;
 
-            this.generateNote(output.value)
+            this.generateNote(msgData.x.hash)
           }
         }
       }, 
       generateNote(value) {
-        this.p5Object.addParticles()
+        this.p5Object.addParticles(value)
+        PolySynth.playNote();
+        Sampler.playNote();
         FMSynth.playNote();
-                PolySynth.playNote();
-                Sampler.playNote();
 
 
       },
@@ -122,7 +118,6 @@ import {
   
     data() {
       return {
-        msg: 'Welcome to Your Vue.js App',
         websocket: null,
         buttonClass: 'Start',
         playing: false,
@@ -140,11 +135,22 @@ font-family: 'Space Mono', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color:$text-color;
+  color:rgb(221, 255, 228);
   margin-top: 60px;
+    background: rgba(44, 48, 46, 1) !important;
+  height:100vh;
+  overflow-y: hidden;
+}
+a {
+  color: rgba(83, 122, 90, 1) !important;
+}
+
+.btn {
+  border:0px !important;
+  padding:0px !important;
 }
 body {
-  background: $color1;
+  background: rgba(44, 48, 46, 1) !important;
 
 }
 
@@ -204,13 +210,13 @@ body {
     position: absolute;
     top: 20px;
     left:20px;
-    width:50px;
   }
 
   .play-btn {
     color:$color3;
     border: 0px;
-    margin-left:-10px;
+    margin-left:20px;
+    margin-top: -8px;
     height:20px;
     padding:0px;
   }

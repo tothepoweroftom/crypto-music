@@ -8,9 +8,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import store from './store/store'
 import VueNativeSock from 'vue-native-websocket'
-Vue.use(VueNativeSock, "wss://ws.blockchain.info/inv")
 import VueCircleSlider from 'vue-circle-slider'
+import SocialSharing from 'vue-social-sharing'
  
+Vue.use(SocialSharing)
+Vue.use(VueNativeSock, "wss://ws.blockchain.info/inv")
 Vue.use(VueCircleSlider)
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false

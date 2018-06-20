@@ -4,16 +4,15 @@ import Delaunay from './Delaunay'
 export default function( sketch ) {
 
     var allParticles = [];
-    var maxLevel = 8;
+    var maxLevel = 4;
     var useFill = false;
     
     var data = [];
     var width = 0;
     var height = 0;
     var counter = 0;
-  
-    sketch.setup = function() {
 
+    sketch.setup = function() {
       width = document.getElementById('visualizer').clientWidth;
       height = document.getElementById('visualizer').clientHeight;
 
@@ -21,15 +20,18 @@ export default function( sketch ) {
   
       
       sketch.textAlign(sketch.CENTER);
-      
+      sketch.textFont("Space Mono");
+      sketch.textSize(8);
+
       // sketch.background(0);
     };
   
     sketch.draw = function() {
+
        // Create fade effect.
        sketch.noStroke();
       if(counter <= 500) {
-        sketch.fill(44, 48, 46, 127);
+        sketch.fill(44, 48, 46, 0.5);
         counter += 1;
 
       } else {
@@ -81,16 +83,21 @@ export default function( sketch ) {
           // Base its hue by the particle's life.
           if (useFill) {
             sketch.noStroke();
-            sketch.fill(155, 225, 157);
+            sketch.fill(155 + p1.life , 225 +p1.life, 157+p1.life);
           } else {
+            let a = counter / 10;
             sketch.noFill();
-            sketch.stroke(155, 225, 157);
+            sketch.stroke(55 + p1.life*4 , 125 +p1.life*4, 57+p1.life*4);
           }
           
           sketch.triangle(p1.pos.x, p1.pos.y, 
                   p2.pos.x, p2.pos.y, 
                   p3.pos.x, p3.pos.y);
         }
+      }
+
+      if (allParticles.length > 500) {
+        allParticles = [];
       }
     };
 
@@ -99,10 +106,22 @@ export default function( sketch ) {
 
     };
 
-    sketch.addParticles = function() {
-
+    sketch.addParticles = function(hash) {
+      sketch.noStroke();
+      sketch.fill(201, 253, 212);
       let x = sketch.random( 50, width-5);
       let y = sketch.random(50, height-50);
+      let offset = sketch.random(-150,100) + 50;
+      let offset2 = sketch.random(-150,100) + 50;
+
+      let offx = x + offset;
+      let offy = y + offset2;
+
+      sketch.text(hash,offx,offy);
+
+      sketch.noFill();
+      sketch.stroke(201, 253, 212);
+      sketch.line(x+30,y+30,offx,offy);
       allParticles.push(new Particle(x, y, maxLevel, sketch));
 
     }
